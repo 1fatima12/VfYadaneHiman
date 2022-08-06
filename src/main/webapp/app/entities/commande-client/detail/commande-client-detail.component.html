@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commandeClient">
+      <h2 data-cy="commandeClientDetailsHeading"><span>Commande Client</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ commandeClient.id }}</span>
+        </dd>
+        <dt><span>Date Com</span></dt>
+        <dd>
+          <span>{{ commandeClient.dateCom | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Designation</span></dt>
+        <dd>
+          <span>{{ commandeClient.designation }}</span>
+        </dd>
+        <dt><span>Client</span></dt>
+        <dd>
+          <div *ngIf="commandeClient.client">
+            <a [routerLink]="['/client', commandeClient.client?.id, 'view']">{{ commandeClient.client?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commande-client', commandeClient.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

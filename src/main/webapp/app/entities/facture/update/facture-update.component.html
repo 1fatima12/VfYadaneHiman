@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-facture-heading" data-cy="FactureCreateUpdateHeading">Create or edit a Facture</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_idFacture">Id Facture</label>
+          <input type="number" class="form-control" name="idFacture" id="field_idFacture" data-cy="idFacture" formControlName="idFacture" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_arrivage">Arrivage</label>
+          <select class="form-control" id="field_arrivage" data-cy="arrivage" name="arrivage" formControlName="arrivage">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="arrivageOption.id === editForm.get('arrivage')!.value?.id ? editForm.get('arrivage')!.value : arrivageOption"
+              *ngFor="let arrivageOption of arrivagesCollection; trackBy: trackArrivageById"
+            >
+              {{ arrivageOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

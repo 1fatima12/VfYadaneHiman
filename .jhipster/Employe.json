@@ -1,0 +1,71 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110656",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "employe",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "poste",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "salaire",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "dateEmbauche",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Employe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "employe",
+      "ownerSide": true,
+      "relationshipName": "location",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "magazin",
+      "otherEntityRelationshipName": "employe",
+      "relationshipName": "magzin",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

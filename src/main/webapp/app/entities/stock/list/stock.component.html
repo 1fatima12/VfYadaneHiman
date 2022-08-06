@@ -1,0 +1,98 @@
+<div>
+  <h2 id="page-heading" data-cy="StockHeading">
+    <span>Stocks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-stock"
+        [routerLink]="['/stock/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Stock </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="stocks?.length === 0">
+    <span>No stocks found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="stocks && stocks.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="qte"><span>Qte</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="produit.id"><span>Produit</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="magazin.id"><span>Magazin</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/stock', stock.id, 'view']">{{ stock.id }}</a>
+          </td>
+          <td>{{ stock.qte }}</td>
+          <td>
+            <div *ngIf="stock.produit">
+              <a [routerLink]="['/produit', stock.produit?.id, 'view']">{{ stock.produit?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="stock.magazin">
+              <a [routerLink]="['/magazin', stock.magazin?.id, 'view']">{{ stock.magazin?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/stock', stock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/stock', stock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(stock)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="stocks && stocks.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

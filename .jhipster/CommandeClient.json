@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110701",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "commande_client",
+  "fields": [
+    {
+      "fieldName": "dateCom",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CommandeClient",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "commandeClient",
+      "relationshipName": "client",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="arrivage">
+      <h2 data-cy="arrivageDetailsHeading"><span>Arrivage</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ arrivage.id }}</span>
+        </dd>
+        <dt><span>Date Arrivage</span></dt>
+        <dd>
+          <span>{{ arrivage.dateArrivage | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Prix Achat</span></dt>
+        <dd>
+          <span>{{ arrivage.prixAchat }}</span>
+        </dd>
+        <dt><span>Produit</span></dt>
+        <dd>
+          <div *ngIf="arrivage.produit">
+            <a [routerLink]="['/produit', arrivage.produit?.id, 'view']">{{ arrivage.produit?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Fournisseur</span></dt>
+        <dd>
+          <div *ngIf="arrivage.fournisseur">
+            <a [routerLink]="['/fournisseur', arrivage.fournisseur?.id, 'view']">{{ arrivage.fournisseur?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/arrivage', arrivage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-arrivage-heading" data-cy="ArrivageCreateUpdateHeading">Create or edit a Arrivage</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateArrivage">Date Arrivage</label>
+          <div class="input-group">
+            <input
+              id="field_dateArrivage"
+              data-cy="dateArrivage"
+              type="text"
+              class="form-control"
+              name="dateArrivage"
+              ngbDatepicker
+              #dateArrivageDp="ngbDatepicker"
+              formControlName="dateArrivage"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateArrivageDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prixAchat">Prix Achat</label>
+          <input type="number" class="form-control" name="prixAchat" id="field_prixAchat" data-cy="prixAchat" formControlName="prixAchat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_produit">Produit</label>
+          <select class="form-control" id="field_produit" data-cy="produit" name="produit" formControlName="produit">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="produitOption.id === editForm.get('produit')!.value?.id ? editForm.get('produit')!.value : produitOption"
+              *ngFor="let produitOption of produitsSharedCollection; trackBy: trackProduitById"
+            >
+              {{ produitOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fournisseur">Fournisseur</label>
+          <select class="form-control" id="field_fournisseur" data-cy="fournisseur" name="fournisseur" formControlName="fournisseur">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                fournisseurOption.id === editForm.get('fournisseur')!.value?.id ? editForm.get('fournisseur')!.value : fournisseurOption
+              "
+              *ngFor="let fournisseurOption of fournisseursSharedCollection; trackBy: trackFournisseurById"
+            >
+              {{ fournisseurOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

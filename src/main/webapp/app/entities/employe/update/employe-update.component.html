@@ -1,0 +1,143 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-employe-heading" data-cy="EmployeCreateUpdateHeading">Create or edit a Employe</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_telephone">Telephone</label>
+          <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_adresse">Adresse</label>
+          <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_age">Age</label>
+          <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_photo">Photo</label>
+          <div>
+            <div *ngIf="editForm.get('photo')!.value" class="form-text text-danger clearfix">
+              <a class="pull-start" (click)="openFile(editForm.get('photo')!.value, editForm.get('photoContentType')!.value)">open</a><br />
+              <span class="pull-start">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(editForm.get('photo')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ photo: null }); editForm.patchValue({ photoContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_photo" data-cy="photo" (change)="setFileData($event, 'photo', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_poste">Poste</label>
+          <input type="text" class="form-control" name="poste" id="field_poste" data-cy="poste" formControlName="poste" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_salaire">Salaire</label>
+          <input type="number" class="form-control" name="salaire" id="field_salaire" data-cy="salaire" formControlName="salaire" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateEmbauche">Date Embauche</label>
+          <div class="input-group">
+            <input
+              id="field_dateEmbauche"
+              data-cy="dateEmbauche"
+              type="text"
+              class="form-control"
+              name="dateEmbauche"
+              ngbDatepicker
+              #dateEmbaucheDp="ngbDatepicker"
+              formControlName="dateEmbauche"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEmbaucheDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_location">Location</label>
+          <select class="form-control" id="field_location" data-cy="location" name="location" formControlName="location">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="locationOption.id === editForm.get('location')!.value?.id ? editForm.get('location')!.value : locationOption"
+              *ngFor="let locationOption of locationsCollection; trackBy: trackLocationById"
+            >
+              {{ locationOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_magzin">Magzin</label>
+          <select class="form-control" id="field_magzin" data-cy="magzin" name="magzin" formControlName="magzin">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="magazinOption.id === editForm.get('magzin')!.value?.id ? editForm.get('magzin')!.value : magazinOption"
+              *ngFor="let magazinOption of magazinsSharedCollection; trackBy: trackMagazinById"
+            >
+              {{ magazinOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

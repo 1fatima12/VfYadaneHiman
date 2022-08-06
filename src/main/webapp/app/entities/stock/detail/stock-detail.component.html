@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="stock">
+      <h2 data-cy="stockDetailsHeading"><span>Stock</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ stock.id }}</span>
+        </dd>
+        <dt><span>Qte</span></dt>
+        <dd>
+          <span>{{ stock.qte }}</span>
+        </dd>
+        <dt><span>Produit</span></dt>
+        <dd>
+          <div *ngIf="stock.produit">
+            <a [routerLink]="['/produit', stock.produit?.id, 'view']">{{ stock.produit?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Magazin</span></dt>
+        <dd>
+          <div *ngIf="stock.magazin">
+            <a [routerLink]="['/magazin', stock.magazin?.id, 'view']">{{ stock.magazin?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/stock', stock.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

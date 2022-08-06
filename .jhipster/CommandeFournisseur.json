@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110700",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "commande_fournisseur",
+  "fields": [
+    {
+      "fieldName": "dateCom",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CommandeFournisseur",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "fournisseur",
+      "otherEntityRelationshipName": "commandeFournisseur",
+      "relationshipName": "fournisseur",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

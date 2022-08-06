@@ -1,0 +1,11 @@
+id;type;avance;etat
+1;VirBc;54924;false
+2;VirBc;42484;false
+3;ESPECE;43818;false
+4;VirBc;4651;false
+5;TPE;4833;true
+6;TPE;30034;false
+7;CHEQUE;12652;true
+8;VirBc;68658;true
+9;CHEQUE;82662;false
+10;TPE;98126;true

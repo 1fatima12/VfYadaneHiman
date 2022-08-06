@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="location">
+      <h2 data-cy="locationDetailsHeading"><span>Location</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ location.id }}</span>
+        </dd>
+        <dt><span>Rue Address</span></dt>
+        <dd>
+          <span>{{ location.rueAddress }}</span>
+        </dd>
+        <dt><span>Code Postal</span></dt>
+        <dd>
+          <span>{{ location.codePostal }}</span>
+        </dd>
+        <dt><span>Ville</span></dt>
+        <dd>
+          <span>{{ location.ville }}</span>
+        </dd>
+        <dt><span>State Province</span></dt>
+        <dd>
+          <span>{{ location.stateProvince }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/location', location.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

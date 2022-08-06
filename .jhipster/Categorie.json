@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110650",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "categorie",
+  "fields": [
+    {
+      "fieldName": "nomCategorie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Categorie",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "categorie",
+      "relationshipName": "produit",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

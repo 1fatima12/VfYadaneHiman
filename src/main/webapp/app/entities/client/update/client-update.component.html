@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-client-heading" data-cy="ClientCreateUpdateHeading">Create or edit a Client</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_numProd">Num Prod</label>
+          <input type="number" class="form-control" name="numProd" id="field_numProd" data-cy="numProd" formControlName="numProd" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nomProd">Nom Prod</label>
+          <input type="text" class="form-control" name="nomProd" id="field_nomProd" data-cy="nomProd" formControlName="nomProd" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_status">Status</label>
+          <input type="checkbox" class="form-check" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prixVente">Prix Vente</label>
+          <input type="number" class="form-control" name="prixVente" id="field_prixVente" data-cy="prixVente" formControlName="prixVente" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_image">Image</label>
+          <div>
+            <div *ngIf="editForm.get('image')!.value" class="form-text text-danger clearfix">
+              <a class="pull-start" (click)="openFile(editForm.get('image')!.value, editForm.get('imageContentType')!.value)">open</a><br />
+              <span class="pull-start">{{ editForm.get('imageContentType')!.value }}, {{ byteSize(editForm.get('image')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ image: null }); editForm.patchValue({ imageContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_image" data-cy="image" (change)="setFileData($event, 'image', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="image" id="field_image" data-cy="image" formControlName="image" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imageContentType"
+            id="field_imageContentType"
+            formControlName="imageContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_ice">Ice</label>
+          <input type="text" class="form-control" name="ice" id="field_ice" data-cy="ice" formControlName="ice" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_location">Location</label>
+          <select class="form-control" id="field_location" data-cy="location" name="location" formControlName="location">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="locationOption.id === editForm.get('location')!.value?.id ? editForm.get('location')!.value : locationOption"
+              *ngFor="let locationOption of locationsCollection; trackBy: trackLocationById"
+            >
+              {{ locationOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

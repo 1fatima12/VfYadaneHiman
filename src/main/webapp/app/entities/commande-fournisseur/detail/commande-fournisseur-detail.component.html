@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commandeFournisseur">
+      <h2 data-cy="commandeFournisseurDetailsHeading"><span>Commande Fournisseur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ commandeFournisseur.id }}</span>
+        </dd>
+        <dt><span>Date Com</span></dt>
+        <dd>
+          <span>{{ commandeFournisseur.dateCom | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Designation</span></dt>
+        <dd>
+          <span>{{ commandeFournisseur.designation }}</span>
+        </dd>
+        <dt><span>Fournisseur</span></dt>
+        <dd>
+          <div *ngIf="commandeFournisseur.fournisseur">
+            <a [routerLink]="['/fournisseur', commandeFournisseur.fournisseur?.id, 'view']">{{ commandeFournisseur.fournisseur?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commande-fournisseur', commandeFournisseur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

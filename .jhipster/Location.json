@@ -1,0 +1,61 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110659",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "location",
+  "fields": [
+    {
+      "fieldName": "rueAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codePostal",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "stateProvince",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Location",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "employe",
+      "otherEntityRelationshipName": "location",
+      "ownerSide": false,
+      "relationshipName": "employe",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "location",
+      "ownerSide": false,
+      "relationshipName": "client",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "fournisseur",
+      "otherEntityRelationshipName": "location",
+      "ownerSide": false,
+      "relationshipName": "fournisseur",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "magazin",
+      "otherEntityRelationshipName": "location",
+      "ownerSide": false,
+      "relationshipName": "magazin",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

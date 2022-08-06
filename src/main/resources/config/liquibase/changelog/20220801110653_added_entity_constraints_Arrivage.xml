@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Arrivage.
+    -->
+    <changeSet id="20220801110653-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="produit_id"
+                                 baseTableName="arrivage"
+                                 constraintName="fk_arrivage__produit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="produit"/>
+
+        <addForeignKeyConstraint baseColumnNames="fournisseur_id"
+                                 baseTableName="arrivage"
+                                 constraintName="fk_arrivage__fournisseur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+    </changeSet>
+</databaseChangeLog>

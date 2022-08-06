@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity BonCommande.
+    -->
+    <changeSet id="20220801110704-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="commandef_id"
+                                 baseTableName="bon_commande"
+                                 constraintName="fk_bon_commande__commandef_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="commande_fournisseur"/>
+
+        <addForeignKeyConstraint baseColumnNames="commandec_id"
+                                 baseTableName="bon_commande"
+                                 constraintName="fk_bon_commande__commandec_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="commande_client"/>
+
+        <addForeignKeyConstraint baseColumnNames="produit_id"
+                                 baseTableName="bon_commande"
+                                 constraintName="fk_bon_commande__produit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="produit"/>
+    </changeSet>
+</databaseChangeLog>

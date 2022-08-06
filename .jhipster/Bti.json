@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110654",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "bti",
+  "fields": [
+    {
+      "fieldName": "numOrdre",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "ref",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "qte",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Bti",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "bti",
+      "relationshipName": "produit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "magazin",
+      "otherEntityRelationshipName": "bti",
+      "relationshipName": "magazin",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

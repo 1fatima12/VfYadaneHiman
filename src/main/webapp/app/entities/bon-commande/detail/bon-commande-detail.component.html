@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bonCommande">
+      <h2 data-cy="bonCommandeDetailsHeading"><span>Bon Commande</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ bonCommande.id }}</span>
+        </dd>
+        <dt><span>Qte Commandee</span></dt>
+        <dd>
+          <span>{{ bonCommande.qteCommandee }}</span>
+        </dd>
+        <dt><span>Commande F</span></dt>
+        <dd>
+          <div *ngIf="bonCommande.commandeF">
+            <a [routerLink]="['/commande-fournisseur', bonCommande.commandeF?.id, 'view']">{{ bonCommande.commandeF?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Commande C</span></dt>
+        <dd>
+          <div *ngIf="bonCommande.commandeC">
+            <a [routerLink]="['/commande-client', bonCommande.commandeC?.id, 'view']">{{ bonCommande.commandeC?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Produit</span></dt>
+        <dd>
+          <div *ngIf="bonCommande.produit">
+            <a [routerLink]="['/produit', bonCommande.produit?.id, 'view']">{{ bonCommande.produit?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bon-commande', bonCommande.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

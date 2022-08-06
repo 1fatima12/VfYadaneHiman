@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="fournisseur">
+      <h2 data-cy="fournisseurDetailsHeading"><span>Fournisseur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ fournisseur.id }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ fournisseur.nom }}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+          <span>{{ fournisseur.prenom }}</span>
+        </dd>
+        <dt><span>Telephone</span></dt>
+        <dd>
+          <span>{{ fournisseur.telephone }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ fournisseur.email }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ fournisseur.adresse }}</span>
+        </dd>
+        <dt><span>Age</span></dt>
+        <dd>
+          <span>{{ fournisseur.age }}</span>
+        </dd>
+        <dt><span>Photo</span></dt>
+        <dd>
+          <div *ngIf="fournisseur.photo">
+            <a (click)="openFile(fournisseur.photo, fournisseur.photoContentType)">open</a>
+            {{ fournisseur.photoContentType }}, {{ byteSize(fournisseur.photo) }}
+          </div>
+        </dd>
+        <dt><span>Entreprise</span></dt>
+        <dd>
+          <span>{{ fournisseur.entreprise }}</span>
+        </dd>
+        <dt><span>Fax</span></dt>
+        <dd>
+          <span>{{ fournisseur.fax }}</span>
+        </dd>
+        <dt><span>Ice</span></dt>
+        <dd>
+          <span>{{ fournisseur.ice }}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+          <div *ngIf="fournisseur.location">
+            <a [routerLink]="['/location', fournisseur.location?.id, 'view']">{{ fournisseur.location?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/fournisseur', fournisseur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

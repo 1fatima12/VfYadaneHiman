@@ -1,0 +1,114 @@
+<div>
+  <h2 id="page-heading" data-cy="BonCommandeHeading">
+    <span>Bon Commandes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bon-commande"
+        [routerLink]="['/bon-commande/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Bon Commande </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="bonCommandes?.length === 0">
+    <span>No bonCommandes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="bonCommandes && bonCommandes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="qteCommandee"><span>Qte Commandee</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="commandeF.id"><span>Commande F</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="commandeC.id"><span>Commande C</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="produit.id"><span>Produit</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bonCommande of bonCommandes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/bon-commande', bonCommande.id, 'view']">{{ bonCommande.id }}</a>
+          </td>
+          <td>{{ bonCommande.qteCommandee }}</td>
+          <td>
+            <div *ngIf="bonCommande.commandeF">
+              <a [routerLink]="['/commande-fournisseur', bonCommande.commandeF?.id, 'view']">{{ bonCommande.commandeF?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="bonCommande.commandeC">
+              <a [routerLink]="['/commande-client', bonCommande.commandeC?.id, 'view']">{{ bonCommande.commandeC?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="bonCommande.produit">
+              <a [routerLink]="['/produit', bonCommande.produit?.id, 'view']">{{ bonCommande.produit?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/bon-commande', bonCommande.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/bon-commande', bonCommande.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(bonCommande)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="bonCommandes && bonCommandes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

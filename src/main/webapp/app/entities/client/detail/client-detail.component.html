@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="client">
+      <h2 data-cy="clientDetailsHeading"><span>Client</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ client.id }}</span>
+        </dd>
+        <dt><span>Num Prod</span></dt>
+        <dd>
+          <span>{{ client.numProd }}</span>
+        </dd>
+        <dt><span>Nom Prod</span></dt>
+        <dd>
+          <span>{{ client.nomProd }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ client.status }}</span>
+        </dd>
+        <dt><span>Prix Vente</span></dt>
+        <dd>
+          <span>{{ client.prixVente }}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+          <div *ngIf="client.image">
+            <a (click)="openFile(client.image, client.imageContentType)">open</a>
+            {{ client.imageContentType }}, {{ byteSize(client.image) }}
+          </div>
+        </dd>
+        <dt><span>Ice</span></dt>
+        <dd>
+          <span>{{ client.ice }}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+          <div *ngIf="client.location">
+            <a [routerLink]="['/location', client.location?.id, 'view']">{{ client.location?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

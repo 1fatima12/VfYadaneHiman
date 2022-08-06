@@ -1,0 +1,104 @@
+<div>
+  <h2 id="page-heading" data-cy="BtiHeading">
+    <span>Btis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bti"
+        [routerLink]="['/bti/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Bti </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="btis?.length === 0">
+    <span>No btis found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="btis && btis.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="numOrdre"><span>Num Ordre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="ref"><span>Ref</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="qte"><span>Qte</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="produit.id"><span>Produit</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="magazin.id"><span>Magazin</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bti of btis; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/bti', bti.id, 'view']">{{ bti.id }}</a>
+          </td>
+          <td>{{ bti.numOrdre }}</td>
+          <td>{{ bti.date | formatMediumDate }}</td>
+          <td>{{ bti.ref }}</td>
+          <td>{{ bti.qte }}</td>
+          <td>
+            <div *ngIf="bti.produit">
+              <a [routerLink]="['/produit', bti.produit?.id, 'view']">{{ bti.produit?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="bti.magazin">
+              <a [routerLink]="['/magazin', bti.magazin?.id, 'view']">{{ bti.magazin?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/bti', bti.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/bti', bti.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(bti)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="btis && btis.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

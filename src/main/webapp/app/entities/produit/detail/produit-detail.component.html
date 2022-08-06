@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="produit">
+      <h2 data-cy="produitDetailsHeading"><span>Produit</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ produit.id }}</span>
+        </dd>
+        <dt><span>Num Prod</span></dt>
+        <dd>
+          <span>{{ produit.numProd }}</span>
+        </dd>
+        <dt><span>Nom Prod</span></dt>
+        <dd>
+          <span>{{ produit.nomProd }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ produit.status }}</span>
+        </dd>
+        <dt><span>Prix Vente</span></dt>
+        <dd>
+          <span>{{ produit.prixVente }}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+          <div *ngIf="produit.image">
+            <a (click)="openFile(produit.image, produit.imageContentType)">open</a>
+            {{ produit.imageContentType }}, {{ byteSize(produit.image) }}
+          </div>
+        </dd>
+        <dt><span>Categorie</span></dt>
+        <dd>
+          <div *ngIf="produit.categorie">
+            <a [routerLink]="['/categorie', produit.categorie?.id, 'view']">{{ produit.categorie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Marque</span></dt>
+        <dd>
+          <div *ngIf="produit.marque">
+            <a [routerLink]="['/marque', produit.marque?.id, 'view']">{{ produit.marque?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

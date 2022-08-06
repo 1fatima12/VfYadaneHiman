@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110655",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "stock",
+  "fields": [
+    {
+      "fieldName": "qte",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Stock",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "stock",
+      "relationshipName": "produit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "magazin",
+      "otherEntityRelationshipName": "stock",
+      "relationshipName": "magazin",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

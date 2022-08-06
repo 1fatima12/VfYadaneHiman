@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110703",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "paiement",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "ModePaiement",
+      "fieldValues": "CHEQUE,TPE,ESPECE,VirBc"
+    },
+    {
+      "fieldName": "avance",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Paiement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

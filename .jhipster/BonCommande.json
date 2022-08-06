@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110704",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "bon_commande",
+  "fields": [
+    {
+      "fieldName": "qteCommandee",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "BonCommande",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "commandeFournisseur",
+      "otherEntityRelationshipName": "bonCommande",
+      "relationshipName": "commandeF",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "commandeClient",
+      "otherEntityRelationshipName": "bonCommande",
+      "relationshipName": "commandeC",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "bonCommande",
+      "relationshipName": "produit",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

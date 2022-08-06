@@ -1,0 +1,11 @@
+id;num_prod;nom_prod;status;prix_vente;image;image_content_type
+1;98199;lavender;false;27301;../fake-data/blob/hipster.png;image/png
+2;70855;de;false;42889;../fake-data/blob/hipster.png;image/png
+3;76924;connecting;true;87545;../fake-data/blob/hipster.png;image/png
+4;86858;Centre Avon b;false;87458;../fake-data/blob/hipster.png;image/png
+5;80269;Namibie;false;91449;../fake-data/blob/hipster.png;image/png
+6;86195;Soap;false;5187;../fake-data/blob/hipster.png;image/png
+7;39721;grow;true;34167;../fake-data/blob/hipster.png;image/png
+8;52158;Credit;true;76882;../fake-data/blob/hipster.png;image/png
+9;17906;Jewelery integrate;false;44289;../fake-data/blob/hipster.png;image/png
+10;5204;PNG THX;false;46806;../fake-data/blob/hipster.png;image/png

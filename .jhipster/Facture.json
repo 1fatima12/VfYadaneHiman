@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110702",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "facture",
+  "fields": [
+    {
+      "fieldName": "idFacture",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Facture",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "arrivage",
+      "otherEntityRelationshipName": "facture",
+      "ownerSide": true,
+      "relationshipName": "arrivage",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

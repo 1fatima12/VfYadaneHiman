@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110649",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "produit",
+  "fields": [
+    {
+      "fieldName": "numProd",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nomProd",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "prixVente",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Produit",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "produit",
+      "relationshipName": "categorie",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "marque",
+      "otherEntityRelationshipName": "produit",
+      "relationshipName": "marque",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

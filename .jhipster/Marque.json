@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110651",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "marque",
+  "fields": [
+    {
+      "fieldName": "nomMarque",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Marque",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "marque",
+      "relationshipName": "produit",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

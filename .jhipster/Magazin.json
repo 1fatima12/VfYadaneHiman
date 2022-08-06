@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110652",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "magazin",
+  "fields": [
+    {
+      "fieldName": "nomMagazin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresseMagazin",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Magazin",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "magazin",
+      "ownerSide": true,
+      "relationshipName": "location",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

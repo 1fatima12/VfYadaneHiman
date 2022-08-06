@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110653",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "arrivage",
+  "fields": [
+    {
+      "fieldName": "dateArrivage",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "prixAchat",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Arrivage",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "arrivage",
+      "relationshipName": "produit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "fournisseur",
+      "otherEntityRelationshipName": "arrivage",
+      "relationshipName": "fournisseur",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "facture",
+      "otherEntityRelationshipName": "arrivage",
+      "ownerSide": false,
+      "relationshipName": "facture",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

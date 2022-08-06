@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-bon-commande-heading" data-cy="BonCommandeCreateUpdateHeading">Create or edit a Bon Commande</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        
+     <div class="row mb-3">
+          <label class="form-label" for="field_commandeF">Commande CF</label>
+          <select class="form-control" id="field_commandeF" data-cy="commandeF" list= "list" name="commandeF" formControlName="commandeF">
+
+                               <option [ngValue]="null"></option>
+
+            <option
+              [ngValue]="
+                commandeFournisseurOption.designation === editForm.get('commandeF')!.value?.designation ? editForm.get('commandeF')!.value : commandeFournisseurOption
+              "
+              *ngFor="let commandeFournisseurOption of commandeFournisseursSharedCollection; trackBy: trackCommandeFournisseurById"
+            >
+              {{ commandeFournisseurOption.designation }}
+            </option>
+</select>          
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_produit">Produit</label>
+          <select class="form-control" id="field_produit" data-cy="produit" name="produit" formControlName="produit">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="produitOption.nomProd === editForm.get('produit')!.value?.nomProd ? editForm.get('produit')!.value : produitOption"
+              *ngFor="let produitOption of produitsSharedCollection; trackBy: trackProduitById"
+            >
+              {{ produitOption.nomProd }}
+            </option>
+          </select> <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-produit"
+        [routerLink]="['/produit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Produit </span>
+      </button>
+       
+        </div>     
+        
+        <div class="row mb-3">
+          <label class="form-label" for="field_qteCommandee">Qte Commandee</label>
+          <input
+            type="number"
+            class="form-control"
+            name="qteCommandee"
+            id="field_qteCommandee"
+            data-cy="qteCommandee"
+            formControlName="qteCommandee"
+          />
+        </div>
+
+      
+
+      </div>
+ 
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

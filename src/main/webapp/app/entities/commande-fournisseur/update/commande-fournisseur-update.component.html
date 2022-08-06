@@ -1,0 +1,189 @@
+
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+  
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-commande-fournisseur-heading" data-cy="CommandeFournisseurCreateUpdateHeading">Create or edit a Commande Fournisseur</h2>
+  
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input id="idCommande" type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+  
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateCom">Date Com</label>
+          <div class="input-group">
+            <input
+              id="field_dateCom"
+              data-cy="dateCom"
+              type="text"
+              class="form-control"
+              name="dateCom"
+              ngbDatepicker
+              #dateComDp="ngbDatepicker"
+              formControlName="dateCom"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateComDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_designation">Designation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="designation"
+            id="field_designation"
+            data-cy="designation"
+            formControlName="designation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fournisseur">Fournisseur</label>
+          <select class="form-control" id="field_fournisseur" data-cy="fournisseur" name="fournisseur" formControlName="fournisseur">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                fournisseurOption.id === editForm.get('fournisseur')!.value?.id ? editForm.get('fournisseur')!.value : fournisseurOption
+              "
+              *ngFor="let fournisseurOption of fournisseursSharedCollection; trackBy: trackFournisseurById"
+            >
+              {{ fournisseurOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+    <form class="form-inline my-2 my-lg-0">
+      <input (ngModelChange)="searchProduit(key.value)" #key="ngModel" ngModel
+       name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search Product..." required>
+   </form>
+ <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-produit"
+        [routerLink]="['/produit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Produit </span>
+      </button>
+<div id="main-container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">num</th>
+      <th scope="col">nom</th>
+      <th scope="col">prixVente</th>
+      <th scope="col">Qauntité</th>
+
+      <th scope="col">Ajoutez au Panier</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of produitsList">
+     
+      <td>{{prod?.numProd}}</td>
+      <td>{{prod?.nomProd}}</td>
+      <td>{{prod?.prixVente}}</td>      
+        <td> <div class="form-outline">
+                    <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
+                  </div></td>
+
+        
+<td> <div class="float-right btn-group btn-group-sm">
+              <a (click)="onOpenModal(prod)"  class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"> <fa-icon icon="plus"></fa-icon></a>
+           </div></td>
+         
+    </tr>
+    
+  </tbody>
+  
+</table>
+ </div>
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+ 
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Cart {{produits.length}} items</h5>
+          </div>
+          <div  *ngFor="let produit of produits"  class="card-body">
+            <!-- Single item -->
+            <div class="row">
+              <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                <!-- Image -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img src={{produit.image}}
+                    class="w-100" alt="" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                  </a>
+                </div>
+                <!-- Image -->
+              </div>
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <!-- Data -->
+                 <p ><strong>{{produit.nomProd}}</strong></p>
+              
+                 </div>
+                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                 <div class="d-flex mb-4" style="max-width: 300px">
+                 <div class="form-outline">
+                    
+                    <label class="form-label" for="form1" >Quantity</label>
+                  </div>
+                 </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+
+          </div>
+
+        </div>
+        <button type="button" class="btn btn-secondary">Fin de panier</button>
+
+      </div>
+   </form>
+ </div>
+
+<!-- Modal -->
+<div class="modal fade" id="ajouterPanier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ajouterPanier">Ajout au panier</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Vous voulez vraiment achtez ce produit ?
+      
+      N'esitez pas de spécifier la quantité volue!!!
+      
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Annuler</button>
+        <button (click)="AjoutAuPanier()" type="button" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-stock-heading" data-cy="StockCreateUpdateHeading">Create or edit a Stock</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_qte">Qte</label>
+          <input type="number" class="form-control" name="qte" id="field_qte" data-cy="qte" formControlName="qte" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_produit">Produit</label>
+          <select class="form-control" id="field_produit" data-cy="produit" name="produit" formControlName="produit">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="produitOption.id === editForm.get('produit')!.value?.id ? editForm.get('produit')!.value : produitOption"
+              *ngFor="let produitOption of produitsSharedCollection; trackBy: trackProduitById"
+            >
+              {{ produitOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_magazin">Magazin</label>
+          <select class="form-control" id="field_magazin" data-cy="magazin" name="magazin" formControlName="magazin">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="magazinOption.id === editForm.get('magazin')!.value?.id ? editForm.get('magazin')!.value : magazinOption"
+              *ngFor="let magazinOption of magazinsSharedCollection; trackBy: trackMagazinById"
+            >
+              {{ magazinOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

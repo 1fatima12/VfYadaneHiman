@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="employe">
+      <h2 data-cy="employeDetailsHeading"><span>Employe</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ employe.id }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ employe.nom }}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+          <span>{{ employe.prenom }}</span>
+        </dd>
+        <dt><span>Telephone</span></dt>
+        <dd>
+          <span>{{ employe.telephone }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ employe.email }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ employe.adresse }}</span>
+        </dd>
+        <dt><span>Age</span></dt>
+        <dd>
+          <span>{{ employe.age }}</span>
+        </dd>
+        <dt><span>Photo</span></dt>
+        <dd>
+          <div *ngIf="employe.photo">
+            <a (click)="openFile(employe.photo, employe.photoContentType)">open</a>
+            {{ employe.photoContentType }}, {{ byteSize(employe.photo) }}
+          </div>
+        </dd>
+        <dt><span>Poste</span></dt>
+        <dd>
+          <span>{{ employe.poste }}</span>
+        </dd>
+        <dt><span>Salaire</span></dt>
+        <dd>
+          <span>{{ employe.salaire }}</span>
+        </dd>
+        <dt><span>Date Embauche</span></dt>
+        <dd>
+          <span>{{ employe.dateEmbauche | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+          <div *ngIf="employe.location">
+            <a [routerLink]="['/location', employe.location?.id, 'view']">{{ employe.location?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Magzin</span></dt>
+        <dd>
+          <div *ngIf="employe.magzin">
+            <a [routerLink]="['/magazin', employe.magzin?.id, 'view']">{{ employe.magzin?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/employe', employe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110657",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "fournisseur",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "entreprise",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ice",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Fournisseur",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "fournisseur",
+      "ownerSide": true,
+      "relationshipName": "location",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

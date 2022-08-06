@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bti">
+      <h2 data-cy="btiDetailsHeading"><span>Bti</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ bti.id }}</span>
+        </dd>
+        <dt><span>Num Ordre</span></dt>
+        <dd>
+          <span>{{ bti.numOrdre }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ bti.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Ref</span></dt>
+        <dd>
+          <span>{{ bti.ref }}</span>
+        </dd>
+        <dt><span>Qte</span></dt>
+        <dd>
+          <span>{{ bti.qte }}</span>
+        </dd>
+        <dt><span>Produit</span></dt>
+        <dd>
+          <div *ngIf="bti.produit">
+            <a [routerLink]="['/produit', bti.produit?.id, 'view']">{{ bti.produit?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Magazin</span></dt>
+        <dd>
+          <div *ngIf="bti.magazin">
+            <a [routerLink]="['/magazin', bti.magazin?.id, 'view']">{{ bti.magazin?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bti', bti.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

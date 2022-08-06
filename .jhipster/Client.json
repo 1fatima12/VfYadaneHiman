@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20220801110658",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "client",
+  "fields": [
+    {
+      "fieldName": "numProd",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nomProd",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "prixVente",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "ice",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Client",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "client",
+      "ownerSide": true,
+      "relationshipName": "location",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

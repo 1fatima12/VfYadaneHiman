@@ -1,0 +1,157 @@
+entity Produit {
+	numProd Long
+    nomProd String
+    status Boolean
+    prixVente Float
+    image Blob
+}
+
+entity Categorie{
+    nomCategorie  String
+    description  String
+    image  Blob
+}
+entity Marque{
+    nomMarque  String
+    logo  Blob
+
+}
+entity Magazin{
+    nomMagazin String 
+    adresseMagazin  String
+}
+entity Arrivage{
+    dateArrivage  LocalDate
+    prixAchat Float
+}
+entity Bti{
+    numOrdre  Long
+    date  LocalDate
+    ref  Long
+    qte Integer
+}
+entity Stock{
+   qte Integer
+
+}
+
+
+entity Employe {
+ 	nom String
+    prenom String
+    telephone String
+    email String
+    adresse String
+    age Integer
+    photo Blob
+	poste String
+    salaire Float
+    dateEmbauche LocalDate
+    
+}
+
+entity Fournisseur {
+    nom String
+    prenom String
+    telephone String
+    email String
+    adresse String
+    age Integer
+    photo Blob
+	entreprise String
+    fax String
+    ice String
+}
+
+entity Client {
+numProd Long
+    nomProd String
+    status Boolean
+    prixVente Float
+    image Blob
+    ice String
+}
+
+entity Location {
+	rueAddress String,
+	codePostal String,
+	ville String,
+	stateProvince String
+}
+
+
+
+entity CommandeFournisseur {
+		dateCom LocalDate
+        designation String
+
+}
+
+entity CommandeClient {
+		dateCom LocalDate
+        designation String
+        
+
+}
+
+entity Facture {
+	idFacture Integer
+    montant Double
+	
+}
+
+entity Paiement {
+	
+    type ModePaiement
+    avance Double
+    etat Boolean
+	
+}
+
+enum ModePaiement {
+    CHEQUE, TPE, ESPECE, VirBc
+}
+
+entity BonCommande {
+		qteCommandee Double
+}
+
+relationship OneToOne {
+    Facture {arrivage} to Arrivage {facture} 
+    Employe {location} to Location{employe}
+    Client{location} to Location{client}
+    Fournisseur {location} to Location {fournisseur}
+    Magazin {location} to Location {magazin}
+
+}
+relationship OneToMany {
+Categorie to Produit{categorie}
+Marque to Produit{marque}
+
+}
+relationship ManyToOne{
+    BonCommande{commandeF} to CommandeFournisseur
+    BonCommande{commandeC} to CommandeClient
+    BonCommande{produit} to Produit
+    Stock {produit} to Produit
+    Stock {magazin} to Magazin
+    Bti {produit} to Produit
+    Bti {magazin} to Magazin
+    Arrivage {produit} to Produit
+    Arrivage {fournisseur} to Fournisseur
+    CommandeClient {client} to Client
+    CommandeFournisseur {fournisseur} to Fournisseur
+    Employe {magzin} to Magazin
+
+}
+// Set pagination options
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+ dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
