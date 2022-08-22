@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Produits' },
         loadChildren: () => import('./produit/produit.module').then(m => m.ProduitModule),
       },
-      {
+    {
         path: 'categorie',
         data: { pageTitle: 'Categories' },
         loadChildren: () => import('./categorie/categorie.module').then(m => m.CategorieModule),

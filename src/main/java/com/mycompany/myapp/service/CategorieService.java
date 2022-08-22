@@ -1,6 +1,9 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.Categorie;
 import com.mycompany.myapp.service.dto.CategorieDTO;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +58,5 @@ public interface CategorieService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    List<Categorie> getAllCat();
 }

@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Stock implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "location" }, allowSetters = true)
+    @JsonIgnore
     private Magazin magazin;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

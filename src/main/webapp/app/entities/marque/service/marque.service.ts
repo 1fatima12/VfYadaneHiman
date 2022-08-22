@@ -57,4 +57,8 @@ export class MarqueService {
     }
     return marqueCollection;
   }
+  getMarques(): Observable<IMarque[]>{
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.http.get<any>(`${this.resourceUrl}/getAll`)
+  }
 }

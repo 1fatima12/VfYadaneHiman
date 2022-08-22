@@ -1,6 +1,11 @@
 package com.mycompany.myapp.repository;
 
+import com.mycompany.myapp.domain.Magazin;
+import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.domain.Stock;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +14,9 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface StockRepository extends JpaRepository<Stock, Long> {}
+public interface StockRepository extends JpaRepository<Stock, Long> {
+	List<Stock> findByMagazinId(long id);
+	List<Stock> findByProduitId(Long id);
+	
+	
+}

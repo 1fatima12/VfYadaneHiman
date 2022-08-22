@@ -40,7 +40,10 @@ export class MagazinService {
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
-
+    getMagazins(): Observable<IMagazin[]>{
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.http.get<any>(`${this.resourceUrl}/getAll`)
+  }
   addMagazinToCollectionIfMissing(magazinCollection: IMagazin[], ...magazinsToCheck: (IMagazin | null | undefined)[]): IMagazin[] {
     const magazins: IMagazin[] = magazinsToCheck.filter(isPresent);
     if (magazins.length > 0) {

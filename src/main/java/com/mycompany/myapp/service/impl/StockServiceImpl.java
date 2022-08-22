@@ -1,10 +1,15 @@
 package com.mycompany.myapp.service.impl;
 
+import com.mycompany.myapp.domain.Magazin;
+import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.domain.Stock;
+import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.repository.StockRepository;
 import com.mycompany.myapp.service.StockService;
 import com.mycompany.myapp.service.dto.StockDTO;
 import com.mycompany.myapp.service.mapper.StockMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,12 +28,13 @@ public class StockServiceImpl implements StockService {
     private final Logger log = LoggerFactory.getLogger(StockServiceImpl.class);
 
     private final StockRepository stockRepository;
-
+    private final ProduitRepository produitRepository;
     private final StockMapper stockMapper;
 
-    public StockServiceImpl(StockRepository stockRepository, StockMapper stockMapper) {
+    public StockServiceImpl(StockRepository stockRepository, StockMapper stockMapper ,ProduitRepository produitRepository) {
         this.stockRepository = stockRepository;
         this.stockMapper = stockMapper;
+        this.produitRepository=produitRepository;
     }
 
     @Override
@@ -81,4 +87,31 @@ public class StockServiceImpl implements StockService {
         log.debug("Request to delete Stock : {}", id);
         stockRepository.deleteById(id);
     }
+
+
+	@Override
+	public List<Stock> getStockByMagzin(Long m) {
+		return stockRepository.findByMagazinId(m);
+	}
+
+	@Override
+	public List<Stock> getStockByProduit(Long p) {
+		// TODO Auto-generated method stub
+		return stockRepository.findByProduitId(p);
+	}
+
+	@Override
+	public void verfierStock() {
+		int somme=0;
+		List<Produit> listProduit = produitRepository.findAll();
+		for(Produit prod : listProduit) {
+			List<Stock> listStock=stockRepository.findByProduitId(prod.getId());
+			for(Stock stock : listStock) {
+				somme=somme+stock.getQte();
+			}
+			if(somme==0) {
+				prod.setStatus(false);
+			}
+		}
+	}
 }

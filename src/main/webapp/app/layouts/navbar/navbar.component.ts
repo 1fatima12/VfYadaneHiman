@@ -14,6 +14,7 @@ import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+ 
   inProduction?: boolean;
   isNavbarCollapsed = true;
   openAPIEnabled?: boolean;
@@ -25,8 +26,8 @@ export class NavbarComponent implements OnInit {
     private loginService: LoginService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private router: Router
-  ) {
+    private router: Router,
+    ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
     }

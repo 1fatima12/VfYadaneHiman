@@ -1,5 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Magazin;
 import com.mycompany.myapp.repository.MagazinRepository;
 import com.mycompany.myapp.service.MagazinService;
 import com.mycompany.myapp.service.dto.MagazinDTO;
@@ -177,5 +178,10 @@ public class MagazinResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @GetMapping("/magazins/getAll")
+    public List<Magazin> getAll(){
+    	return magazinService.getAll();
+    	
     }
 }

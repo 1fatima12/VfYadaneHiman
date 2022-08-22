@@ -15,7 +15,8 @@
       aria-label="Toggle navigation"
       (click)="toggleNavbar()"
     >
-      <fa-icon icon="bars"></fa-icon>
+     <fa-icon icon="bars"></fa-icon>
+
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
@@ -48,7 +49,8 @@
                 class="dropdown-item"
                 routerLink="produit"
                 routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
+               [routerLinkActiveOptions]="{ exact: true }"
+
                 (click)="collapseNavbar()"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>

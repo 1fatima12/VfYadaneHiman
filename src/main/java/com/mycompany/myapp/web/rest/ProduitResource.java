@@ -1,9 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.CommandeFournisseur;
+import com.mycompany.myapp.domain.Magazin;
 import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.ProduitService;
+import com.mycompany.myapp.service.StockService;
 import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -42,10 +44,13 @@ public class ProduitResource {
     private final ProduitService produitService;
 
     private final ProduitRepository produitRepository;
+    
+    private final StockService stockService;
 
-    public ProduitResource(ProduitService produitService, ProduitRepository produitRepository) {
+    public ProduitResource(ProduitService produitService, ProduitRepository produitRepository,StockService stockService) {
         this.produitService = produitService;
         this.produitRepository = produitRepository;
+        this.stockService=stockService;
     }
 
     /**
@@ -80,6 +85,7 @@ public class ProduitResource {
      */
     @GetMapping("/produits/getAll")
     public List<Produit> getAll(){
+    	stockService.verfierStock();
     	return produitRepository.findAll();
     }
     @PutMapping("/produits/{id}")
@@ -184,4 +190,5 @@ public class ProduitResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
 }

@@ -1,5 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Categorie;
+import com.mycompany.myapp.domain.Marque;
 import com.mycompany.myapp.repository.MarqueRepository;
 import com.mycompany.myapp.service.MarqueService;
 import com.mycompany.myapp.service.dto.MarqueDTO;
@@ -177,5 +179,9 @@ public class MarqueResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @GetMapping("/marques/getAll")
+    public List<Marque> getAll() {
+    	return  marqueService.getAll();
     }
 }

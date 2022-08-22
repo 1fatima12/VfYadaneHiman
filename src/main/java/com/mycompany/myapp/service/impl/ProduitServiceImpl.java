@@ -1,7 +1,10 @@
 package com.mycompany.myapp.service.impl;
 
+import com.mycompany.myapp.domain.Magazin;
 import com.mycompany.myapp.domain.Produit;
+import com.mycompany.myapp.domain.Stock;
 import com.mycompany.myapp.repository.ProduitRepository;
+import com.mycompany.myapp.repository.StockRepository;
 import com.mycompany.myapp.service.ProduitService;
 import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.service.mapper.ProduitMapper;
@@ -23,12 +26,17 @@ public class ProduitServiceImpl implements ProduitService {
     private final Logger log = LoggerFactory.getLogger(ProduitServiceImpl.class);
 
     private final ProduitRepository produitRepository;
+    
+    private final StockRepository stockRepository;
+
 
     private final ProduitMapper produitMapper;
+    
 
-    public ProduitServiceImpl(ProduitRepository produitRepository, ProduitMapper produitMapper) {
+    public ProduitServiceImpl(ProduitRepository produitRepository, ProduitMapper produitMapper ,StockRepository stockRepository ) {
         this.produitRepository = produitRepository;
         this.produitMapper = produitMapper;
+        this.stockRepository=stockRepository;
     }
 
     @Override
@@ -81,4 +89,7 @@ public class ProduitServiceImpl implements ProduitService {
         log.debug("Request to delete Produit : {}", id);
         produitRepository.deleteById(id);
     }
+
+
+	
 }

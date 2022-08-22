@@ -1,5 +1,9 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Categorie;
+import com.mycompany.myapp.domain.Magazin;
+import com.mycompany.myapp.domain.Stock;
+import com.mycompany.myapp.repository.MagazinRepository;
 import com.mycompany.myapp.repository.StockRepository;
 import com.mycompany.myapp.service.StockService;
 import com.mycompany.myapp.service.dto.StockDTO;
@@ -40,10 +44,13 @@ public class StockResource {
     private final StockService stockService;
 
     private final StockRepository stockRepository;
+    
+    private final MagazinRepository magazinRepository;
 
-    public StockResource(StockService stockService, StockRepository stockRepository) {
+    public StockResource(StockService stockService, StockRepository stockRepository,MagazinRepository magazinRepository) {
         this.stockService = stockService;
         this.stockRepository = stockRepository;
+        this.magazinRepository=magazinRepository;
     }
 
     /**
@@ -177,5 +184,15 @@ public class StockResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @GetMapping("/stocks/getByMagazin/{magazin_id}")
+    public List<Stock> getStockByMagazin(@PathVariable Long magazin_id){
+    	
+    	return stockService.getStockByMagzin(magazin_id);
+    }
+    @GetMapping("/stocks/getByProduit/{produit_id}")
+
+    public List<Stock> getStockByProduit(@PathVariable Long produit_id){
+    	return stockService.getStockByProduit(produit_id);
     }
 }

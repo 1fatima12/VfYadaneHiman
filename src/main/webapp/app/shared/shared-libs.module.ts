@@ -6,6 +6,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  exports: [FormsModule, CommonModule, NgbModule, InfiniteScrollModule, FontAwesomeModule, ReactiveFormsModule],
+  exports: [FormsModule, CommonModule, NgbModule, InfiniteScrollModule,FontAwesomeModule, ReactiveFormsModule],
 })
 export class SharedLibsModule {}

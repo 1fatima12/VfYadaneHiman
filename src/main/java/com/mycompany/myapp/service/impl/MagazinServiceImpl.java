@@ -5,6 +5,8 @@ import com.mycompany.myapp.repository.MagazinRepository;
 import com.mycompany.myapp.service.MagazinService;
 import com.mycompany.myapp.service.dto.MagazinDTO;
 import com.mycompany.myapp.service.mapper.MagazinMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,4 +83,9 @@ public class MagazinServiceImpl implements MagazinService {
         log.debug("Request to delete Magazin : {}", id);
         magazinRepository.deleteById(id);
     }
+
+	@Override
+	public List<Magazin> getAll() {
+		return magazinRepository.findAll();
+	}
 }

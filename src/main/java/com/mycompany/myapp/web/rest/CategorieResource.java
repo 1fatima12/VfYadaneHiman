@@ -1,5 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Categorie;
 import com.mycompany.myapp.repository.CategorieRepository;
 import com.mycompany.myapp.service.CategorieService;
 import com.mycompany.myapp.service.dto.CategorieDTO;
@@ -177,5 +178,9 @@ public class CategorieResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @GetMapping("/categories/getAll")
+    public List<Categorie> getAll() {
+    	return  categorieService.getAllCat();
     }
 }

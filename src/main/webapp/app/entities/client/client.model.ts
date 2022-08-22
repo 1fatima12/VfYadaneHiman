@@ -10,6 +10,8 @@ export interface IClient {
   image?: string | null;
   ice?: string | null;
   location?: ILocation | null;
+  login?: string;
+
 }
 
 export class Client implements IClient {

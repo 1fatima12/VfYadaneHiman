@@ -36,11 +36,19 @@ export class StockService {
     const options = createRequestOption(req);
     return this.http.get<IStock[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+ public getStockByProduit(produitId : number): Observable<IStock[]>{
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+	return this.http.get<any>(`${this.resourceUrl}/getByProduit/${produitId}`)
+}
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
-
+  public getStockByMagazin(magazinId : number): Observable<IStock[]>{
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.http.get<any>(`${this.resourceUrl}/getByMagazin/${magazinId}`)
+  }
   addStockToCollectionIfMissing(stockCollection: IStock[], ...stocksToCheck: (IStock | null | undefined)[]): IStock[] {
     const stocks: IStock[] = stocksToCheck.filter(isPresent);
     if (stocks.length > 0) {

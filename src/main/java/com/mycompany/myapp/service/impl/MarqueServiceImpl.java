@@ -5,6 +5,8 @@ import com.mycompany.myapp.repository.MarqueRepository;
 import com.mycompany.myapp.service.MarqueService;
 import com.mycompany.myapp.service.dto.MarqueDTO;
 import com.mycompany.myapp.service.mapper.MarqueMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,4 +83,10 @@ public class MarqueServiceImpl implements MarqueService {
         log.debug("Request to delete Marque : {}", id);
         marqueRepository.deleteById(id);
     }
+
+	@Override
+	public List<Marque> getAll() {
+		// TODO Auto-generated method stub
+		return marqueRepository.findAll();
+	}
 }

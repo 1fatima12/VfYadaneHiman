@@ -31,7 +31,7 @@ export class CategorieService {
       observe: 'response',
     });
   }
-
+   
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<ICategorie>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
@@ -63,5 +63,9 @@ export class CategorieService {
       return [...categoriesToAdd, ...categorieCollection];
     }
     return categorieCollection;
+  }
+  getCategories(): Observable<ICategorie[]>{
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.http.get<any>(`${this.resourceUrl}/getAll`)
   }
 }

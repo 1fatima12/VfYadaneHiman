@@ -1,6 +1,9 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.Magazin;
 import com.mycompany.myapp.service.dto.MagazinDTO;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +58,5 @@ public interface MagazinService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    List<Magazin> getAll();
 }

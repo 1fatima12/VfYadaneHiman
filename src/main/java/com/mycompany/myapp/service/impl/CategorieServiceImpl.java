@@ -5,6 +5,8 @@ import com.mycompany.myapp.repository.CategorieRepository;
 import com.mycompany.myapp.service.CategorieService;
 import com.mycompany.myapp.service.dto.CategorieDTO;
 import com.mycompany.myapp.service.mapper.CategorieMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,4 +83,10 @@ public class CategorieServiceImpl implements CategorieService {
         log.debug("Request to delete Categorie : {}", id);
         categorieRepository.deleteById(id);
     }
+
+	@Override
+	public List<Categorie> getAllCat() {
+		// TODO Auto-generated method stub
+		return categorieRepository.findAll();
+	}
 }
